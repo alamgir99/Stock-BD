@@ -1,0 +1,66 @@
+﻿<!-- This tempalte is used for full width pages such as minute chart etc -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>@ViewBag.Title</title>
+<meta charset="utf-8" />
+<meta name="description" content="Stock-bd: DSE data and tools" />
+<meta name="keywords" content="keywords, here" />
+<meta name="robots" content="index, follow, noarchive" />
+<meta name="googlebot" content="noarchive" />
+<link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+<meta name="viewport" content="width=device-width" />
+
+<link rel="stylesheet" type="text/css" media="screen" href="/Styles/style.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="/Styles/jquery-ui.css" />
+
+<script type="text/javascript" src="/Scripts/jquery.js"></script> 
+<script type="text/javascript" src="/Scripts/jquery-ui-1.8.6.custom.js"></script> 
+<script type="text/javascript" src="/Scripts/jquery.countdown.js"></script> 
+	
+<script type="text/javascript" src="/Scripts/ajaxticker.js"></script>
+
+<script type="text/javascript" src="/Scripts/highstock.js"></script> 
+<script type="text/javascript" src="/Scripts/jquery.jdpicker.js"></script> 
+<script type="text/javascript" src="/Scripts/jscroller-0.4.js"></script> 
+<script type="text/javascript" src="/Scripts/minmax.js"></script> 
+    
+<script type="text/javascript" src="/Scripts/title_hack.js"></script> 
+<script type="text/javascript" src="/Scripts/modules/exporting.js"></script> 
+</head>
+<body>  
+<!-- wrap starts here -->
+<div id="wrap">
+        <!-- header -->
+        <div id="header">            
+            <span id="slogan"> @ViewBag.SiteHeader </span>
+            <!-- tabs - navigation on the top -->
+            <ul> <!-- use runat server to attach the current id -->
+	            <li id="@ViewBag.HomePage"><a href="@Url.Action("Index", "home")"><span>home</span></a></li>
+	            <li id="@ViewBag.MinuteChartPage"><a href="@Url.Action("Index","MinuteChart")"><span>minute chart</span></a></li>
+                <li id="@ViewBag.DayChartPage"><a href="@Url.Action("Index","DailyChart")"><span>day chart</span></a></li>
+	            <li id="@ViewBag.MonitorPage"><a href="@Url.Action("Index","Monitor")"><span>monitor</span></a></li>
+	            <li id="@ViewBag.CompInfoPage"><a href="@Url.Action("Index","CompanyInfo")"><span>comp info</span></a></li>
+	            <li id="@ViewBag.DownloadPage"><a href="@Url.Action("Index","Download")"><span>download</span></a></li>
+	            <li id="@ViewBag.ContactPage"><a href="@Url.Action("Contact","Home")"><span>contact</span></a> </li>
+	        </ul>
+        </div>
+        <div id="header-logo">     
+	        <!-- tickscroller -->
+        </div>
+
+    <div id="main_full">
+        @RenderBody()					
+	</div>
+
+    <div style="height:10px"></div>   
+        <!-- footer starts here -->
+        <div class="footer">
+		    <p>	
+		    &copy; 2010-2016 Stock-BD.com | 
+	    	Alamgir Mohammed 
+		    </p>
+        </div>
+</div> <!-- wrap-->
+</body>
+</html>

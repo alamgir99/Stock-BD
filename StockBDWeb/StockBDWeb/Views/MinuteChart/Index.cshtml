@@ -1,0 +1,15 @@
+﻿@{
+    ViewBag.Title = "minute Chart";
+    ViewBag.SiteHeader = "DSE: data and tools";
+    ViewBag.MinuteChartPage = "current";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+<h2>Daily Chart</h2>
+@using (Html.BeginForm("Show","MinuteChart",FormMethod.Post))
+{
+   Html.RenderPartial("_TickerAndDate");
+}
+<div style="width:100%; text-align:center; min-height:100px;padding-top:150px">
+    <span style="font-size:30pt;">Minute Chart</span>
+</div>

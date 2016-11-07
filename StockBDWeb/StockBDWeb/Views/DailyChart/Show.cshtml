@@ -1,0 +1,110 @@
+﻿@model StockBDWeb.Models.DailyChart
+
+@{
+    ViewBag.Title = "Daily Chart";
+    ViewBag.SiteHeader = "DSE: data and tools";
+    ViewBag.DayChartPage = "current";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+<h2>Daily Chart</h2>
+@using (Html.BeginForm("Show","DailyChart",FormMethod.Post))
+{
+   Html.RenderPartial("_TickerAndDuration");
+}
+<div style="height:10px;"> </div>
+<div id="dayCharContainer" style="width: 980px; height: 550px; margin: 0 auto; text-align:center">
+<p style="text-align:center; padding-top:20px;">Select an instrument and click on the Show button.</p>
+</div>
+
+<script type="text/javascript"> 
+    Highcharts.setOptions({
+        global: {
+            useUTC: false
+        }
+    });
+
+    $(function () {
+            var 
+                // set the allowed units for data grouping
+                groupingUnits = [[
+                    'week',                         // unit name
+                    [1]                             // allowed multiples
+                ], [
+                    'month',
+                    [1, 2, 3, 4, 6]
+                ]];
+
+            // Create the chart
+            $('#dayCharContainer').highcharts('StockChart', {
+
+                chart: {
+                    margin:[60, 85, 70, 85],
+                    zoomType: 'x',
+                    borderWidth:2,
+                    borderColor: "#4572A7",
+                    backgroundColor: "#FFFFFF"
+                },
+
+                rangeSelector: {
+                    enabled: false
+                },
+
+                title : {
+                    text : ''
+                },
+
+                scrollbar : {
+                    enabled : false
+                },
+
+                navigator : {
+                    enabled : false
+                },
+                yAxis: [{
+                    labels: {
+                        align: 'right',
+                        x: -3
+                    },
+                    title: {
+                        text: 'OHLC'
+                    },
+                    height: '60%',
+                    lineWidth: 2
+                }, {
+                    labels: {
+                        align: 'right',
+                        x: -3
+                    },
+                    title: {
+                        text: 'Volume'
+                    },
+                    top: '65%',
+                    height: '35%',
+                    offset: 0,
+                    lineWidth: 2
+                }],
+                series : [{
+                    name: '@Model.selectTicker Price',
+                    type: 'candlestick',
+                    name: '@Model.selectTicker',
+                    data:  @ViewBag.PriceData ,
+                    dataGrouping: {
+                        units: groupingUnits
+                    },
+                    tooltip: {
+                        valueDecimals: 2
+                    }
+                }, {
+                    type: 'column',
+                    name: 'Volume',
+                    data:  @ViewBag.VolumeData,
+                    yAxis: 1,
+                    dataGrouping: {
+                        units: groupingUnits
+                    }
+                }]
+            });
+    });
+</script> 
+

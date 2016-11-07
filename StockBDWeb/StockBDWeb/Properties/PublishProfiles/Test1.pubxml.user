@@ -1,0 +1,239 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit http://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword />
+    <_PublishTargetUrl>d:\stockbd</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="bin/Antlr3.Runtime.dll">
+      <publishTime>03/05/2016 02:20:59</publishTime>
+    </File>
+    <File Include="bin/EntityFramework.dll">
+      <publishTime>03/05/2016 19:15:57</publishTime>
+    </File>
+    <File Include="bin/EntityFramework.SqlServer.dll">
+      <publishTime>03/05/2016 19:15:57</publishTime>
+    </File>
+    <File Include="bin/Ionic.Zip.dll">
+      <publishTime>06/08/2011 22:01:40</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Web.Infrastructure.dll">
+      <publishTime>04/29/2016 02:04:43</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Web.Mvc.FixedDisplayModes.dll">
+      <publishTime>04/29/2016 02:04:43</publishTime>
+    </File>
+    <File Include="bin/Newtonsoft.Json.dll">
+      <publishTime>03/05/2016 02:20:59</publishTime>
+    </File>
+    <File Include="bin/SharpCompress.dll">
+      <publishTime>05/05/2016 03:41:19</publishTime>
+    </File>
+    <File Include="bin/StockBDWeb.dll">
+      <publishTime>05/11/2016 01:03:55</publishTime>
+    </File>
+    <File Include="bin/System.Data.SQLite.dll">
+      <publishTime>03/05/2016 19:15:15</publishTime>
+    </File>
+    <File Include="bin/System.Data.SQLite.EF6.dll">
+      <publishTime>03/05/2016 19:15:15</publishTime>
+    </File>
+    <File Include="bin/System.Data.SQLite.Linq.dll">
+      <publishTime>03/05/2016 19:15:15</publishTime>
+    </File>
+    <File Include="bin/System.Net.Http.Formatting.dll">
+      <publishTime>04/29/2016 02:04:43</publishTime>
+    </File>
+    <File Include="bin/System.Web.Helpers.dll">
+      <publishTime>04/29/2016 02:04:43</publishTime>
+    </File>
+    <File Include="bin/System.Web.Http.dll">
+      <publishTime>04/29/2016 02:04:43</publishTime>
+    </File>
+    <File Include="bin/System.Web.Http.WebHost.dll">
+      <publishTime>04/29/2016 02:04:43</publishTime>
+    </File>
+    <File Include="bin/System.Web.Mvc.dll">
+      <publishTime>04/29/2016 02:04:43</publishTime>
+    </File>
+    <File Include="bin/System.Web.Optimization.dll">
+      <publishTime>03/05/2016 02:20:59</publishTime>
+    </File>
+    <File Include="bin/System.Web.Razor.dll">
+      <publishTime>04/29/2016 02:04:43</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.Deployment.dll">
+      <publishTime>04/29/2016 02:04:43</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.dll">
+      <publishTime>04/29/2016 02:04:43</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.Razor.dll">
+      <publishTime>04/29/2016 02:04:43</publishTime>
+    </File>
+    <File Include="bin/WebGrease.dll">
+      <publishTime>03/05/2016 02:20:59</publishTime>
+    </File>
+    <File Include="bin/x64/SQLite.Interop.dll">
+      <publishTime>03/05/2016 19:15:15</publishTime>
+    </File>
+    <File Include="bin/x86/SQLite.Interop.dll">
+      <publishTime>03/05/2016 19:15:15</publishTime>
+    </File>
+    <File Include="DataModel.edmx.diagram">
+      <publishTime>03/05/2016 19:23:53</publishTime>
+    </File>
+    <File Include="Global.asax">
+      <publishTime>04/29/2016 02:04:42</publishTime>
+    </File>
+    <File Include="packages.config">
+      <publishTime>05/05/2016 03:41:19</publishTime>
+    </File>
+    <File Include="Scripts/ajaxticker.js">
+      <publishTime>03/29/2012 00:38:01</publishTime>
+    </File>
+    <File Include="Scripts/highstock.js">
+      <publishTime>05/07/2016 01:46:25</publishTime>
+    </File>
+    <File Include="Scripts/jquery-ui-1.8.6.custom.js">
+      <publishTime>03/29/2012 00:38:04</publishTime>
+    </File>
+    <File Include="Scripts/jquery.countdown.js">
+      <publishTime>03/29/2012 00:38:04</publishTime>
+    </File>
+    <File Include="Scripts/jquery.jdpicker.js">
+      <publishTime>03/29/2012 00:38:05</publishTime>
+    </File>
+    <File Include="Scripts/jquery.js">
+      <publishTime>03/29/2012 00:38:06</publishTime>
+    </File>
+    <File Include="Scripts/jscroller-0.4.js">
+      <publishTime>03/29/2012 00:38:06</publishTime>
+    </File>
+    <File Include="Scripts/minmax.js">
+      <publishTime>03/29/2012 00:38:07</publishTime>
+    </File>
+    <File Include="Scripts/modules/canvas-tools.js">
+      <publishTime>05/09/2016 13:35:19</publishTime>
+    </File>
+    <File Include="Scripts/modules/exporting.js">
+      <publishTime>05/09/2016 13:35:19</publishTime>
+    </File>
+    <File Include="Scripts/title_hack.js">
+      <publishTime>03/29/2012 00:38:08</publishTime>
+    </File>
+    <File Include="Styles/images_jq/ajax-loader.gif">
+      <publishTime>05/09/2016 13:32:03</publishTime>
+    </File>
+    <File Include="Styles/images_jq/ui-bg_diagonals-thick_75_f3d8d8_40x40.png">
+      <publishTime>05/09/2016 13:32:03</publishTime>
+    </File>
+    <File Include="Styles/images_jq/ui-bg_dots-small_65_a6a6a6_2x2.png">
+      <publishTime>05/09/2016 13:32:03</publishTime>
+    </File>
+    <File Include="Styles/images_jq/ui-bg_flat_0_333333_40x100.png">
+      <publishTime>05/09/2016 13:32:03</publishTime>
+    </File>
+    <File Include="Styles/images_jq/ui-bg_flat_65_ffffff_40x100.png">
+      <publishTime>05/09/2016 13:32:03</publishTime>
+    </File>
+    <File Include="Styles/images_jq/ui-bg_flat_75_ffffff_40x100.png">
+      <publishTime>05/09/2016 13:32:03</publishTime>
+    </File>
+    <File Include="Styles/images_jq/ui-bg_glass_55_fbf8ee_1x400.png">
+      <publishTime>05/09/2016 13:32:03</publishTime>
+    </File>
+    <File Include="Styles/images_jq/ui-bg_highlight-hard_100_eeeeee_1x100.png">
+      <publishTime>05/09/2016 13:32:03</publishTime>
+    </File>
+    <File Include="Styles/images_jq/ui-bg_highlight-hard_100_f6f6f6_1x100.png">
+      <publishTime>05/09/2016 13:32:03</publishTime>
+    </File>
+    <File Include="Styles/images_jq/ui-bg_highlight-soft_15_cc0000_1x100.png">
+      <publishTime>05/09/2016 13:32:03</publishTime>
+    </File>
+    <File Include="Styles/images_jq/ui-icons_004276_256x240.png">
+      <publishTime>05/09/2016 13:32:03</publishTime>
+    </File>
+    <File Include="Styles/images_jq/ui-icons_cc0000_256x240.png">
+      <publishTime>05/09/2016 13:32:03</publishTime>
+    </File>
+    <File Include="Styles/images_jq/ui-icons_ffffff_256x240.png">
+      <publishTime>05/09/2016 13:32:03</publishTime>
+    </File>
+    <File Include="Styles/images_ug/bg.gif">
+      <publishTime>05/09/2016 13:32:16</publishTime>
+    </File>
+    <File Include="Styles/images_ug/bullet.gif">
+      <publishTime>05/09/2016 13:32:16</publishTime>
+    </File>
+    <File Include="Styles/images_ug/footerbg.gif">
+      <publishTime>05/09/2016 13:32:16</publishTime>
+    </File>
+    <File Include="Styles/images_ug/headerbg.gif">
+      <publishTime>05/09/2016 13:32:16</publishTime>
+    </File>
+    <File Include="Styles/images_ug/quote.gif">
+      <publishTime>05/09/2016 13:32:16</publishTime>
+    </File>
+    <File Include="Styles/images_ug/tableft.gif">
+      <publishTime>05/09/2016 13:32:16</publishTime>
+    </File>
+    <File Include="Styles/images_ug/tabright.gif">
+      <publishTime>05/09/2016 13:32:16</publishTime>
+    </File>
+    <File Include="Views/CompanyInfo/Index.cshtml">
+      <publishTime>05/06/2016 00:25:08</publishTime>
+    </File>
+    <File Include="Views/DailyChart/Index.cshtml">
+      <publishTime>05/06/2016 00:25:47</publishTime>
+    </File>
+    <File Include="Views/DailyChart/Show.cshtml">
+      <publishTime>05/08/2016 03:19:59</publishTime>
+    </File>
+    <File Include="Views/Download/Index.cshtml">
+      <publishTime>05/06/2016 00:24:37</publishTime>
+    </File>
+    <File Include="Views/Home/Contact.cshtml">
+      <publishTime>05/06/2016 01:17:07</publishTime>
+    </File>
+    <File Include="Views/Home/Index.cshtml">
+      <publishTime>05/06/2016 00:16:53</publishTime>
+    </File>
+    <File Include="Views/Home/NotFound.cshtml">
+      <publishTime>05/05/2016 23:03:08</publishTime>
+    </File>
+    <File Include="Views/MinuteChart/Index.cshtml">
+      <publishTime>05/06/2016 00:25:14</publishTime>
+    </File>
+    <File Include="Views/MinuteChart/Show.cshtml">
+      <publishTime>05/08/2016 22:39:42</publishTime>
+    </File>
+    <File Include="Views/Monitor/Index.cshtml">
+      <publishTime>05/06/2016 00:27:05</publishTime>
+    </File>
+    <File Include="Views/Shared/_Layout1.cshtml">
+      <publishTime>05/09/2016 13:52:53</publishTime>
+    </File>
+    <File Include="Views/Shared/_Layout2.cshtml">
+      <publishTime>05/09/2016 12:57:07</publishTime>
+    </File>
+    <File Include="Views/Shared/_TickerAndDate.cshtml">
+      <publishTime>05/08/2016 22:36:17</publishTime>
+    </File>
+    <File Include="Views/Shared/_TickerAndDuration.cshtml">
+      <publishTime>04/05/2016 21:32:25</publishTime>
+    </File>
+    <File Include="Views/Web.config">
+      <publishTime>05/09/2016 13:51:28</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>05/09/2016 13:51:28</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

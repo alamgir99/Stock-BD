@@ -1,0 +1,56 @@
+﻿@model StockBDWeb.Models.MinuteChart
+<!-- This partial view only renders ticker listbox and date list box -->
+@{
+    bool liveSession = false;
+    if (Model.m_settings.settings["liveSession"] == "true")
+    {
+        liveSession = true;
+    }
+  }
+<p>
+<b>Ticker: </b>
+@Html.DropDownListFor(m => Model.selectTicker, Model.TickerList)  
+&nbsp;
+<b>Date :</b>
+<!-- Html.DropDownListFor(m => Model.selectDate, Model.DurationList)   -->
+&nbsp; <input type="text" id="selectDate" name="selectDate"  value="@Model.selectDate.ToString("yyyy-MM-dd")" />
+<input type="submit" value="Show" />
+
+  @{  if(liveSession == true)
+    {
+    @: <span style="width:20px; padding-left:20px"> </span>Automatically updates in :<span class="countdown"></span> sec. 
+    }
+    }
+<span id="respmsg" style="width:200px;text-align:center; color:red;margin-left:10px;">
+  @{
+      if(Model.selectTicker != "" && Model.noDataFound == true)
+        {
+          @: No data found.
+        }
+   } 
+</span>
+</p>
+<script type="text/javascript">
+    var reload_time = 60;
+
+	    $(function() {
+	        $("#selectDate").datepicker({
+	            dateFormat: 'yy-mm-dd',
+	            beforeShowDay: function (day){
+	                if(day.getDay()==5 || day.getDay() == 6)
+	                    return [false];
+	                else
+	                    return [true];
+	            },
+	            maxDate:'+0d'
+	        });
+	        $("#submit").button();
+	    });
+
+	    $(document).ready(
+        function myTimer() {
+            $('span.countdown').countdown({ seconds: reload_time });
+            window.setTimeout(myTimer, reload_time * 1000);
+        }
+    );
+</script>

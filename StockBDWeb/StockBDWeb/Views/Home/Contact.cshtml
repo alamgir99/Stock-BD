@@ -1,0 +1,34 @@
+﻿@model StockBDWeb.Models.Contact
+
+@{
+    ViewBag.Title = "Contact";
+    ViewBag.SiteHeader = "DSE: data and tools";
+    ViewBag.ContactPage = "current";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+<h2>Contact</h2>
+@{
+    if(ViewBag.ContactDone == true) 
+    {
+        <p>Thanks for writing to us. We appreciate your time. We'd contact you once we consider the message.</p>
+   }
+   else
+   {
+        if(ViewBag.ContactError == true) 
+        {
+            <h3>Some information is not correct. Please fill up the form below:</h3>
+        } else {
+         <h3>Please fill up the form below:</h3>   
+        }
+        using (Html.BeginForm()) {
+            @Html.ValidationSummary(true);
+            <label for="contName">Your name :</label>  @Html.TextBoxFor(m => m.contName)
+            <label for="contEmail">Your email :</label> @Html.TextBoxFor(m => m.contEmail)
+            <label for="contText">Query/comment :</label> @Html.TextAreaFor(m => m.contText)
+            <br />
+            <input class="button" type="submit" />	 
+        }
+        
+  }
+}

@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StockBDWeb", "StockBDWeb\StockBDWeb.csproj", "{DE7EA26D-95F2-4B5A-92B2-03F867DFA17C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DE7EA26D-95F2-4B5A-92B2-03F867DFA17C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE7EA26D-95F2-4B5A-92B2-03F867DFA17C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE7EA26D-95F2-4B5A-92B2-03F867DFA17C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE7EA26D-95F2-4B5A-92B2-03F867DFA17C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

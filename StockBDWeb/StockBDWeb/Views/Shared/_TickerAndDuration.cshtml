@@ -1,0 +1,11 @@
+﻿@model StockBDWeb.Models.DailyChart
+<!-- This partial view only renders ticker listbox and duration list box -->
+<p>
+<b>Ticker: </b>
+@Html.DropDownListFor(m => Model.selectTicker, Model.TickerList)  
+&nbsp;
+<b>Duration :</b>
+@Html.DropDownListFor(m => Model.selectDuration, Model.DurationList)  
+&nbsp;
+<input type="submit" value="Show" />
+</p>

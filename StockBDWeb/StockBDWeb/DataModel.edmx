@@ -1,0 +1,731 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="StockBDDataModel.Store" Provider="System.Data.SQLite.EF6" ProviderManifestToken="data source=C:\www\stockbd\db\StockBD.s3db" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AudFinance">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cID" Type="integer" />
+          <Property Name="Year" Type="datetime" />
+          <Property Name="EPS_Orig" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="EPS_Restated" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="PE_Orig" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="PE_Diluted" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="BonusCash" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="BonusStock" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Yield" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="NAV_Orig" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="NAV_Restated" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="ShareCat" Type="char" MaxLength="2" />
+          <Property Name="LoanShortTerm" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="LoanLongTerm" Type="decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="cID" />
+          </Key>
+          <Property Name="cID" Type="integer" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Ticker" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="sID" Type="integer" />
+          <Property Name="AuthCapital" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="PaidupCapital" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="ShareCount" Type="integer" Nullable="false" />
+          <Property Name="FaceValue" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="LotSize" Type="integer" Nullable="false" />
+          <Property Name="ListYear" Type="datetime" />
+          <Property Name="ShareType" Type="integer" Nullable="false" />
+          <Property Name="ActiveListing" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DailyData">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cID" Type="integer" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="Open" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="High" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Low" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Close" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Volume" Type="integer" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EPS_Perf">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cID" Type="integer" />
+          <Property Name="Year" Type="datetime" />
+          <Property Name="Q1" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Q2" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Half_Yearly" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Q3" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Annual" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Holding">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cID" Type="integer" Nullable="false" />
+          <Property Name="ChangeYear" Type="datetime" Nullable="false" />
+          <Property Name="SponDir" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Gov" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Inst" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Forgn" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Public" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="ShareCount" Type="integer" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MF_Perf">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cID" Type="integer" />
+          <Property Name="Year" Type="datetime" />
+          <Property Name="Quarter" Type="integer" />
+          <Property Name="NAV_Market" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="NAV_Cost" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="News">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cID" Type="integer" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="News" Type="varchar" MaxLength="2048" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Recent">
+          <Key>
+            <PropertyRef Name="Ticker" />
+          </Key>
+          <Property Name="Ticker" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="YCP" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Open" Type="decimal" Precision="10" Scale="1" />
+          <Property Name="LTP" Type="decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <EntityType Name="Sector">
+          <Key>
+            <PropertyRef Name="sID" />
+          </Key>
+          <Property Name="sID" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ShortName" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="LongName" Type="varchar" MaxLength="64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ShareCat">
+          <Key>
+            <PropertyRef Name="Categoty" />
+          </Key>
+          <Property Name="Categoty" Type="char" MaxLength="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ShareType">
+          <Key>
+            <PropertyRef Name="sID" />
+          </Key>
+          <Property Name="sID" Type="integer" Nullable="false" />
+          <Property Name="Type" Type="varchar" MaxLength="8" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_AudFinance_0_0">
+          <End Role="ShareCat" Type="Self.ShareCat" Multiplicity="0..1" />
+          <End Role="AudFinance" Type="Self.AudFinance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShareCat">
+              <PropertyRef Name="Categoty" />
+            </Principal>
+            <Dependent Role="AudFinance">
+              <PropertyRef Name="ShareCat" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AudFinance_1_0">
+          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+          <End Role="AudFinance" Type="Self.AudFinance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="cID" />
+            </Principal>
+            <Dependent Role="AudFinance">
+              <PropertyRef Name="cID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DailyData_0_0">
+          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+          <End Role="DailyData" Type="Self.DailyData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="cID" />
+            </Principal>
+            <Dependent Role="DailyData">
+              <PropertyRef Name="cID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EPS_Perf_0_0">
+          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+          <End Role="EPS_Perf" Type="Self.EPS_Perf" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="cID" />
+            </Principal>
+            <Dependent Role="EPS_Perf">
+              <PropertyRef Name="cID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Holding_0_0">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="Holding" Type="Self.Holding" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="cID" />
+            </Principal>
+            <Dependent Role="Holding">
+              <PropertyRef Name="cID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MF_Perf_0_0">
+          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+          <End Role="MF_Perf" Type="Self.MF_Perf" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="cID" />
+            </Principal>
+            <Dependent Role="MF_Perf">
+              <PropertyRef Name="cID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_News_0_0">
+          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+          <End Role="News" Type="Self.News" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="cID" />
+            </Principal>
+            <Dependent Role="News">
+              <PropertyRef Name="cID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="StockBDDataModelStoreContainer">
+          <EntitySet Name="AudFinance" EntityType="Self.AudFinance" store:Type="Tables" />
+          <EntitySet Name="Company" EntityType="Self.Company" store:Type="Tables" />
+          <EntitySet Name="DailyData" EntityType="Self.DailyData" store:Type="Tables" />
+          <EntitySet Name="EPS_Perf" EntityType="Self.EPS_Perf" store:Type="Tables" />
+          <EntitySet Name="Holding" EntityType="Self.Holding" store:Type="Tables" />
+          <EntitySet Name="MF_Perf" EntityType="Self.MF_Perf" store:Type="Tables" />
+          <EntitySet Name="News" EntityType="Self.News" store:Type="Tables" />
+          <EntitySet Name="Recent" EntityType="Self.Recent" store:Type="Tables" />
+          <EntitySet Name="Sector" EntityType="Self.Sector" store:Type="Tables" />
+          <EntitySet Name="ShareCat" EntityType="Self.ShareCat" store:Type="Tables" />
+          <EntitySet Name="ShareType" EntityType="Self.ShareType" store:Type="Tables" />
+          <AssociationSet Name="FK_AudFinance_0_0" Association="Self.FK_AudFinance_0_0">
+            <End Role="ShareCat" EntitySet="ShareCat" />
+            <End Role="AudFinance" EntitySet="AudFinance" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AudFinance_1_0" Association="Self.FK_AudFinance_1_0">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="AudFinance" EntitySet="AudFinance" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DailyData_0_0" Association="Self.FK_DailyData_0_0">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="DailyData" EntitySet="DailyData" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EPS_Perf_0_0" Association="Self.FK_EPS_Perf_0_0">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="EPS_Perf" EntitySet="EPS_Perf" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Holding_0_0" Association="Self.FK_Holding_0_0">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="Holding" EntitySet="Holding" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MF_Perf_0_0" Association="Self.FK_MF_Perf_0_0">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="MF_Perf" EntitySet="MF_Perf" />
+          </AssociationSet>
+          <AssociationSet Name="FK_News_0_0" Association="Self.FK_News_0_0">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="News" EntitySet="News" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="StockBDDataModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AudFinance">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cID" Type="Int64" />
+          <Property Name="Year" Type="DateTime" />
+          <Property Name="EPS_Orig" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="EPS_Restated" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="PE_Orig" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="PE_Diluted" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="BonusCash" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="BonusStock" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Yield" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="NAV_Orig" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="NAV_Restated" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="ShareCat" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="LoanShortTerm" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="LoanLongTerm" Type="Decimal" Precision="10" Scale="2" />
+          <NavigationProperty Name="ShareCat1" Relationship="Self.FK_AudFinance_0_0" FromRole="AudFinance" ToRole="ShareCat" />
+          <NavigationProperty Name="Company" Relationship="Self.FK_AudFinance_1_0" FromRole="AudFinance" ToRole="Company" />
+        </EntityType>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="cID" />
+          </Key>
+          <Property Name="cID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ticker" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="sID" Type="Int64" />
+          <Property Name="AuthCapital" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="PaidupCapital" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="ShareCount" Type="Int64" Nullable="false" />
+          <Property Name="FaceValue" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="LotSize" Type="Int64" Nullable="false" />
+          <Property Name="ShareType" Type="Int64" Nullable="false" />
+          <Property Name="ActiveListing" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="AudFinances" Relationship="Self.FK_AudFinance_1_0" FromRole="Company" ToRole="AudFinance" />
+          <NavigationProperty Name="ShareType1" Relationship="Self.FK_Company_0_0" FromRole="Company" ToRole="ShareType" />
+          <NavigationProperty Name="Sector" Relationship="Self.FK_Company_1_0" FromRole="Company" ToRole="Sector" />
+          <NavigationProperty Name="DailyDatas" Relationship="Self.FK_DailyData_0_0" FromRole="Company" ToRole="DailyData" />
+          <NavigationProperty Name="EPS_Perf" Relationship="Self.FK_EPS_Perf_0_0" FromRole="Company" ToRole="EPS_Perf" />
+          <NavigationProperty Name="Holdings" Relationship="Self.FK_Holding_0_0" FromRole="Company" ToRole="Holding" />
+          <NavigationProperty Name="MF_Perf" Relationship="Self.FK_MF_Perf_0_0" FromRole="Company" ToRole="MF_Perf" />
+          <NavigationProperty Name="News" Relationship="Self.FK_News_0_0" FromRole="Company" ToRole="News" />
+        </EntityType>
+        <EntityType Name="DailyData">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cID" Type="Int64" />
+          <Property Name="Date" Type="DateTime" Nullable="false" />
+          <Property Name="Open" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="High" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Low" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Close" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Volume" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Company" Relationship="Self.FK_DailyData_0_0" FromRole="DailyData" ToRole="Company" />
+        </EntityType>
+        <EntityType Name="EPS_Perf">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cID" Type="Int64" />
+          <Property Name="Year" Type="DateTime" />
+          <Property Name="Q1" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Q2" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Half_Yearly" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Q3" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Annual" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <NavigationProperty Name="Company" Relationship="Self.FK_EPS_Perf_0_0" FromRole="EPS_Perf" ToRole="Company" />
+        </EntityType>
+        <EntityType Name="Holding">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cID" Type="Int64" Nullable="false" />
+          <Property Name="ChangeYear" Type="DateTime" Nullable="false" />
+          <Property Name="SponDir" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Gov" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Inst" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Forgn" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Public" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="ShareCount" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Company" Relationship="Self.FK_Holding_0_0" FromRole="Holding" ToRole="Company" />
+        </EntityType>
+        <EntityType Name="MF_Perf">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cID" Type="Int64" />
+          <Property Name="Year" Type="DateTime" />
+          <Property Name="Quarter" Type="Int64" />
+          <Property Name="NAV_Market" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="NAV_Cost" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <NavigationProperty Name="Company" Relationship="Self.FK_MF_Perf_0_0" FromRole="MF_Perf" ToRole="Company" />
+        </EntityType>
+        <EntityType Name="News">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cID" Type="Int64" />
+          <Property Name="Date" Type="DateTime" Nullable="false" />
+          <Property Name="News1" Type="String" MaxLength="2048" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Company" Relationship="Self.FK_News_0_0" FromRole="News" ToRole="Company" />
+        </EntityType>
+        <EntityType Name="Recent">
+          <Key>
+            <PropertyRef Name="Ticker" />
+          </Key>
+          <Property Name="Ticker" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="YCP" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Open" Type="Decimal" Precision="10" Scale="1" />
+          <Property Name="LTP" Type="Decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <EntityType Name="Sector">
+          <Key>
+            <PropertyRef Name="sID" />
+          </Key>
+          <Property Name="sID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ShortName" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LongName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Companies" Relationship="Self.FK_Company_1_0" FromRole="Sector" ToRole="Company" />
+        </EntityType>
+        <EntityType Name="ShareCat">
+          <Key>
+            <PropertyRef Name="Categoty" />
+          </Key>
+          <Property Name="Categoty" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="AudFinances" Relationship="Self.FK_AudFinance_0_0" FromRole="ShareCat" ToRole="AudFinance" />
+        </EntityType>
+        <EntityType Name="ShareType">
+          <Key>
+            <PropertyRef Name="sID" />
+          </Key>
+          <Property Name="sID" Type="Int64" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Companies" Relationship="Self.FK_Company_0_0" FromRole="ShareType" ToRole="Company" />
+        </EntityType>
+        <Association Name="FK_AudFinance_0_0">
+          <End Role="ShareCat" Type="Self.ShareCat" Multiplicity="0..1" />
+          <End Role="AudFinance" Type="Self.AudFinance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShareCat">
+              <PropertyRef Name="Categoty" />
+            </Principal>
+            <Dependent Role="AudFinance">
+              <PropertyRef Name="ShareCat" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AudFinance_1_0">
+          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+          <End Role="AudFinance" Type="Self.AudFinance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="cID" />
+            </Principal>
+            <Dependent Role="AudFinance">
+              <PropertyRef Name="cID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Company_0_0">
+          <End Role="ShareType" Type="Self.ShareType" Multiplicity="1" />
+          <End Role="Company" Type="Self.Company" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShareType">
+              <PropertyRef Name="sID" />
+            </Principal>
+            <Dependent Role="Company">
+              <PropertyRef Name="ShareType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Company_1_0">
+          <End Role="Sector" Type="Self.Sector" Multiplicity="0..1" />
+          <End Role="Company" Type="Self.Company" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sector">
+              <PropertyRef Name="sID" />
+            </Principal>
+            <Dependent Role="Company">
+              <PropertyRef Name="sID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DailyData_0_0">
+          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+          <End Role="DailyData" Type="Self.DailyData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="cID" />
+            </Principal>
+            <Dependent Role="DailyData">
+              <PropertyRef Name="cID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EPS_Perf_0_0">
+          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+          <End Role="EPS_Perf" Type="Self.EPS_Perf" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="cID" />
+            </Principal>
+            <Dependent Role="EPS_Perf">
+              <PropertyRef Name="cID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Holding_0_0">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="Holding" Type="Self.Holding" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="cID" />
+            </Principal>
+            <Dependent Role="Holding">
+              <PropertyRef Name="cID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MF_Perf_0_0">
+          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+          <End Role="MF_Perf" Type="Self.MF_Perf" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="cID" />
+            </Principal>
+            <Dependent Role="MF_Perf">
+              <PropertyRef Name="cID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_News_0_0">
+          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+          <End Role="News" Type="Self.News" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="cID" />
+            </Principal>
+            <Dependent Role="News">
+              <PropertyRef Name="cID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="StockBDContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AudFinances" EntityType="Self.AudFinance" />
+          <EntitySet Name="Companies" EntityType="Self.Company" />
+          <EntitySet Name="DailyDatas" EntityType="Self.DailyData" />
+          <EntitySet Name="EPS_Perf" EntityType="Self.EPS_Perf" />
+          <EntitySet Name="Holdings" EntityType="Self.Holding" />
+          <EntitySet Name="MF_Perf" EntityType="Self.MF_Perf" />
+          <EntitySet Name="News" EntityType="Self.News" />
+          <EntitySet Name="Recents" EntityType="Self.Recent" />
+          <EntitySet Name="Sectors" EntityType="Self.Sector" />
+          <EntitySet Name="ShareCats" EntityType="Self.ShareCat" />
+          <EntitySet Name="ShareTypes" EntityType="Self.ShareType" />
+          <AssociationSet Name="FK_AudFinance_0_0" Association="Self.FK_AudFinance_0_0">
+            <End Role="ShareCat" EntitySet="ShareCats" />
+            <End Role="AudFinance" EntitySet="AudFinances" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AudFinance_1_0" Association="Self.FK_AudFinance_1_0">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="AudFinance" EntitySet="AudFinances" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Company_0_0" Association="Self.FK_Company_0_0">
+            <End Role="ShareType" EntitySet="ShareTypes" />
+            <End Role="Company" EntitySet="Companies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Company_1_0" Association="Self.FK_Company_1_0">
+            <End Role="Sector" EntitySet="Sectors" />
+            <End Role="Company" EntitySet="Companies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DailyData_0_0" Association="Self.FK_DailyData_0_0">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="DailyData" EntitySet="DailyDatas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EPS_Perf_0_0" Association="Self.FK_EPS_Perf_0_0">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="EPS_Perf" EntitySet="EPS_Perf" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Holding_0_0" Association="Self.FK_Holding_0_0">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="Holding" EntitySet="Holdings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MF_Perf_0_0" Association="Self.FK_MF_Perf_0_0">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="MF_Perf" EntitySet="MF_Perf" />
+          </AssociationSet>
+          <AssociationSet Name="FK_News_0_0" Association="Self.FK_News_0_0">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="News" EntitySet="News" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="StockBDDataModelStoreContainer" CdmEntityContainer="StockBDContext">
+          <EntitySetMapping Name="AudFinances">
+            <EntityTypeMapping TypeName="StockBDDataModel.AudFinance">
+              <MappingFragment StoreEntitySet="AudFinance">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="cID" ColumnName="cID" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="EPS_Orig" ColumnName="EPS_Orig" />
+                <ScalarProperty Name="EPS_Restated" ColumnName="EPS_Restated" />
+                <ScalarProperty Name="PE_Orig" ColumnName="PE_Orig" />
+                <ScalarProperty Name="PE_Diluted" ColumnName="PE_Diluted" />
+                <ScalarProperty Name="BonusCash" ColumnName="BonusCash" />
+                <ScalarProperty Name="BonusStock" ColumnName="BonusStock" />
+                <ScalarProperty Name="Yield" ColumnName="Yield" />
+                <ScalarProperty Name="NAV_Orig" ColumnName="NAV_Orig" />
+                <ScalarProperty Name="NAV_Restated" ColumnName="NAV_Restated" />
+                <ScalarProperty Name="ShareCat" ColumnName="ShareCat" />
+                <ScalarProperty Name="LoanShortTerm" ColumnName="LoanShortTerm" />
+                <ScalarProperty Name="LoanLongTerm" ColumnName="LoanLongTerm" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Companies">
+            <EntityTypeMapping TypeName="StockBDDataModel.Company">
+              <MappingFragment StoreEntitySet="Company">
+                <ScalarProperty Name="cID" ColumnName="cID" />
+                <ScalarProperty Name="Ticker" ColumnName="Ticker" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="sID" ColumnName="sID" />
+                <ScalarProperty Name="AuthCapital" ColumnName="AuthCapital" />
+                <ScalarProperty Name="PaidupCapital" ColumnName="PaidupCapital" />
+                <ScalarProperty Name="ShareCount" ColumnName="ShareCount" />
+                <ScalarProperty Name="FaceValue" ColumnName="FaceValue" />
+                <ScalarProperty Name="LotSize" ColumnName="LotSize" />
+                <ScalarProperty Name="ShareType" ColumnName="ShareType" />
+                <ScalarProperty Name="ActiveListing" ColumnName="ActiveListing" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DailyDatas">
+            <EntityTypeMapping TypeName="StockBDDataModel.DailyData">
+              <MappingFragment StoreEntitySet="DailyData">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="cID" ColumnName="cID" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Open" ColumnName="Open" />
+                <ScalarProperty Name="High" ColumnName="High" />
+                <ScalarProperty Name="Low" ColumnName="Low" />
+                <ScalarProperty Name="Close" ColumnName="Close" />
+                <ScalarProperty Name="Volume" ColumnName="Volume" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EPS_Perf">
+            <EntityTypeMapping TypeName="StockBDDataModel.EPS_Perf">
+              <MappingFragment StoreEntitySet="EPS_Perf">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="cID" ColumnName="cID" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Q1" ColumnName="Q1" />
+                <ScalarProperty Name="Q2" ColumnName="Q2" />
+                <ScalarProperty Name="Half_Yearly" ColumnName="Half_Yearly" />
+                <ScalarProperty Name="Q3" ColumnName="Q3" />
+                <ScalarProperty Name="Annual" ColumnName="Annual" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Holdings">
+            <EntityTypeMapping TypeName="StockBDDataModel.Holding">
+              <MappingFragment StoreEntitySet="Holding">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="cID" ColumnName="cID" />
+                <ScalarProperty Name="ChangeYear" ColumnName="ChangeYear" />
+                <ScalarProperty Name="SponDir" ColumnName="SponDir" />
+                <ScalarProperty Name="Gov" ColumnName="Gov" />
+                <ScalarProperty Name="Inst" ColumnName="Inst" />
+                <ScalarProperty Name="Forgn" ColumnName="Forgn" />
+                <ScalarProperty Name="Public" ColumnName="Public" />
+                <ScalarProperty Name="ShareCount" ColumnName="ShareCount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MF_Perf">
+            <EntityTypeMapping TypeName="StockBDDataModel.MF_Perf">
+              <MappingFragment StoreEntitySet="MF_Perf">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="cID" ColumnName="cID" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Quarter" ColumnName="Quarter" />
+                <ScalarProperty Name="NAV_Market" ColumnName="NAV_Market" />
+                <ScalarProperty Name="NAV_Cost" ColumnName="NAV_Cost" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="News">
+            <EntityTypeMapping TypeName="StockBDDataModel.News">
+              <MappingFragment StoreEntitySet="News">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="cID" ColumnName="cID" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="News1" ColumnName="News" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Recents">
+            <EntityTypeMapping TypeName="StockBDDataModel.Recent">
+              <MappingFragment StoreEntitySet="Recent">
+                <ScalarProperty Name="Ticker" ColumnName="Ticker" />
+                <ScalarProperty Name="YCP" ColumnName="YCP" />
+                <ScalarProperty Name="Open" ColumnName="Open" />
+                <ScalarProperty Name="LTP" ColumnName="LTP" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sectors">
+            <EntityTypeMapping TypeName="StockBDDataModel.Sector">
+              <MappingFragment StoreEntitySet="Sector">
+                <ScalarProperty Name="sID" ColumnName="sID" />
+                <ScalarProperty Name="ShortName" ColumnName="ShortName" />
+                <ScalarProperty Name="LongName" ColumnName="LongName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ShareCats">
+            <EntityTypeMapping TypeName="StockBDDataModel.ShareCat">
+              <MappingFragment StoreEntitySet="ShareCat">
+                <ScalarProperty Name="Categoty" ColumnName="Categoty" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ShareTypes">
+            <EntityTypeMapping TypeName="StockBDDataModel.ShareType">
+              <MappingFragment StoreEntitySet="ShareType">
+                <ScalarProperty Name="sID" ColumnName="sID" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

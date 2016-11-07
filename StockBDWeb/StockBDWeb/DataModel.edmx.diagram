@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d6aee26aea774000ac30fff3814326ce" Name="Diagram1" ZoomLevel="72">
+        <EntityTypeShape EntityType="StockBDDataModel.AudFinance" Width="1.5" PointX="8.25" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="StockBDDataModel.Company" Width="1.5" PointX="3" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="StockBDDataModel.DailyData" Width="1.5" PointX="5.25" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="StockBDDataModel.EPS_Perf" Width="1.5" PointX="5.25" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="StockBDDataModel.Holding" Width="1.5" PointX="5.25" PointY="16.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="StockBDDataModel.MF_Perf" Width="1.5" PointX="5.25" PointY="20.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="StockBDDataModel.News" Width="1.5" PointX="5.25" PointY="23.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="StockBDDataModel.Recent" Width="1.5" PointX="11" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="StockBDDataModel.Sector" Width="1.5" PointX="0.75" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="StockBDDataModel.ShareCat" Width="1.5" PointX="6" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="StockBDDataModel.ShareType" Width="1.5" PointX="0.75" PointY="8.5" IsExpanded="true" />
+        <AssociationConnector Association="StockBDDataModel.FK_AudFinance_0_0" ManuallyRouted="false" />
+        <AssociationConnector Association="StockBDDataModel.FK_AudFinance_1_0" ManuallyRouted="false" />
+        <AssociationConnector Association="StockBDDataModel.FK_Company_0_0" ManuallyRouted="false" />
+        <AssociationConnector Association="StockBDDataModel.FK_Company_1_0" ManuallyRouted="false" />
+        <AssociationConnector Association="StockBDDataModel.FK_DailyData_0_0" ManuallyRouted="false" />
+        <AssociationConnector Association="StockBDDataModel.FK_EPS_Perf_0_0" ManuallyRouted="false" />
+        <AssociationConnector Association="StockBDDataModel.FK_Holding_0_0" ManuallyRouted="false" />
+        <AssociationConnector Association="StockBDDataModel.FK_MF_Perf_0_0" ManuallyRouted="false" />
+        <AssociationConnector Association="StockBDDataModel.FK_News_0_0" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

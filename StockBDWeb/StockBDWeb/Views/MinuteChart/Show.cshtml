@@ -1,0 +1,294 @@
+﻿@model StockBDWeb.Models.MinuteChart
+
+@{
+    ViewBag.Title = "Minute Chart";
+    ViewBag.SiteHeader = "DSE: data and tools";
+    ViewBag.MinuteChartPage = "current";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+    bool liveSession = false;
+    if (Model.m_settings.settings["liveSession"] == "true" && Model.selectDate == DateTime.Today) 
+    {
+         liveSession =  true;
+    }
+}
+
+<h2>Minute Chart</h2>
+@using (Html.BeginForm("Show","MinuteChart",FormMethod.Post))
+{
+   Html.RenderPartial("_TickerAndDate");
+}
+
+<script type="text/javascript"> 
+        var chart; // global
+		var lastx=0; //global time value, for whch the last chart point has been fetched
+		var ticker = '@Model.selectTicker';
+		var reload_time = 60;
+		
+		Highcharts.setOptions({
+			global: {
+			    useUTC: false
+			}
+		});
+    
+		$(document).ready(function() {
+		    //time offset
+		    var timeoffset = 0;
+		    
+
+
+		    chart = new Highcharts.Chart({
+
+		        chart: {
+		            renderTo: 'minCharContainer',
+		            defaultSeriesType: 'line',
+		            events: {
+		                @{ 
+                            if(liveSession== true) {   
+                                @: load: requestData  
+                                } 
+                        }
+                    },
+                    margin:[60, 85, 70, 85],
+                    zoomType: 'x',
+                    borderWidth:2,
+                    borderColor: "#4572A7",
+                    backgroundColor: "#FFFFFF",
+                    showAxes:true,
+                    shadow:false
+                },
+
+		        title: {
+		            text: '@Model.selectTicker (@Model.selectDate.ToString("yyyy-MM-dd"))'
+		        },
+
+                xAxis: {
+                    @{ if(liveSession == true) {
+                           @:  type: 'datetime', tickPixelInterval: 50, tickInterval:1000, maxZoom: 1, 
+                       } else {
+                           @: categories: [ @Model.XData ], tickInterval:10,
+                       }
+                      }
+                 
+            labels: {
+                formatter: function () {
+                    
+                    var tickval = (this.value + timeoffset)*1000;
+                    //alert('Before offset :' + this.value + ', after offset: ' + tickval);
+                    return Highcharts.dateFormat('%I:%M%P', tickval);
+                },
+                enabled:true,
+                rotation:-90,
+                align:'right'
+            },
+            gridLineWidth: 1    
+        }, 
+
+    yAxis:[
+        { // price
+            minPadding: 0.2,
+            maxPadding: 0.2,
+            lineWidth: 1,
+            labels: {
+                /*formatter: function() {
+                    return this.value +'tk';
+                }, */
+                style: {
+                    color: '#4572A7'
+                },
+                x:-15, y:0
+            },
+                        
+            title: {
+                text: 'Price',
+                margin: 70,
+                style: {
+                    color: '#4572A7'
+                }
+            }
+        },
+        { // first series -  volume
+            minPadding: 0.2,
+            maxPadding: 0.2,
+            lineWidth: 1,
+            labels: {
+                /*formatter: function() {
+                    return this.value +' mm';
+                }, */
+                style: {
+                    color: '#89A54E'
+                },
+                x:15, y:0
+            },
+                        
+            title: {
+                text: 'Volume',
+                margin: 70,
+                style: {
+                    color: '#89A54E'
+                }
+            },
+            opposite: true                            
+        }
+    ],
+
+    credits:{
+        enabled:true,
+        href:"http://stock-bd.com",
+        text:"Stock-BD.com",
+        style: {
+            color: '#4572A7',
+            right: '15px',
+            bottom:'15px'
+        }
+    },
+    legend: {
+        //align:"left",
+            enabled:false
+    },
+    tooltip: {
+            formatter: function() {
+                var unit = {
+                    'Price': 'tk',
+                    'Volume': ''
+                }[this.series.name];
+                return 'At '+ Highcharts.dateFormat('%I:%M%P', (this.x+timeoffset)*1000) + '<br/>' + this.series.name+': '+ this.y+unit;
+            }
+    },
+                    
+    series: [ // in reverse order
+        {
+            name: 'Volume',
+            type:'column',
+            color: '#89A54E, #895A4E', // change the bar colours here
+            yAxis: 1,
+            data: [
+                    @{if (liveSession==false) { @Model.YDataVolume } }
+                ]  //load the data with php based on live or nonlive
+            },
+                {
+                    name: 'Price',
+                    type:'spline',
+                    color: '#4572A7',
+                    data: [
+            @{if (liveSession==false) { @Model.YDataPrice } }
+        ], //load the data with php based on live or nonlive
+                        
+                    states: {
+                        hover: {
+                            lineWidth: 1
+                        }
+                    }
+                }
+        ],
+        plotOptions:{
+            column:{
+                    lineWidth:1,
+                    shadow:false,
+                    borderWidth:0
+            },
+            spline:{
+                    lineWidth:1,
+                    shadow:false,
+                    marker:{enabled:true, radius:2}
+            },
+            line:{
+                    lineWidth:1,
+                    shadow:false
+            },
+            point:{
+                    shadow:false
+            }
+        }
+                
+    });  
+    });
+
+           /**
+		 * Request data from the server, add it to the graph and set a timeout to request again
+		 */
+           function requestData() {
+               //alert('Requesting');
+               $.ajax({
+                   url: 'MinServer',
+                   success: function (data) {
+                       var shift = false; //series.data.length > 80; // shift if the series is longer than 20
+                       var parts;
+                       var msg = data.charAt(0);
+
+                       //alert(data);
+                       if (msg == 'E') { //dont reload on error
+                           $("#respmsg").html(data); // no need to reload
+                           $("#respmsg").show();
+                           $('span.countdown').hide();
+                           $('#container').hide();
+
+                       }
+                       else if (msg == 'W') { // a warning
+                           //alert(data);
+                           $("#respmsg").html(data);
+                           $("#respmsg").show();
+                           $('span.countdown').show();
+                           //$('#container').hide();
+                           //try reloading
+                           setTimeout(requestData, reload_time * 1000);
+                       }
+                       else if (msg == 'F') { //trade hour is finished
+                           //alert(data);
+                           $("#respmsg").html(data);
+                           $("#respmsg").show();
+                           $('span.countdown').hide();
+                           //$('#container').hide();
+                           //dont reload
+                       }
+
+                       else { // okay
+                           $("#respmsg").html('');
+                           $("#respmsg").hide();
+                           $('span.countdown').show();
+                           $('#container').show();
+
+                           parts = data.split(';'); // split at ;
+                           // add the point
+                           //alert((points[0]));
+                           var $data = eval(parts[0]);
+                           var i;
+                           for (i = 0; i < $data.length; i++) {
+                               //alert('Seris 0 :'+$data[i]);
+                               chart.series[0].addPoint(eval('[' + $data[i] + ']'), true, shift);
+
+                           }
+
+                           $data = eval(parts[1]);
+                           for (i = 0; i < $data.length; i++) {
+                               //alert('Series 1 :'+$data[i]);
+                               chart.series[1].addPoint(eval('[' + $data[i] + ']'), true, shift);
+                               //chnage the bar colour here
+
+                           }
+
+                           //change the time
+                           lastx = $data[i - 1][0];
+                           //alert(lastx);
+
+                           // call it again after one second
+                           setTimeout(requestData, reload_time * 1000);
+                       }
+                   },
+                   cache: false,
+                   data: 'ticker=' + escape(ticker) + '&lastx=' + lastx,
+                   error: function error(req, status, error) {
+                       $("#respmsg").html('Ajax error, will retry automatically.');
+                       $("#respmsg").show();
+                       setTimeout(requestData, reload_time * 1000);
+                   }
+               });
+           }
+
+</script>
+
+
+<div style="height:10px;"> </div>
+<div id="minCharContainer" style="width: 980px; height: 400px; margin: 0 auto; text-align:center">
+<p style="text-align:center; padding-top:20px;">Select an instrument and click on the Show button.</p>
+</div>
+<p style="text-align:center; padding-top:10px;">Drag and select the chart to zoom in for finer details.</p>
